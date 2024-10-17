@@ -1,0 +1,24 @@
+#Personal Note File
+ProjectNotes.md
+
+#Live Server Settings
+/.vscode
+
+#Node Modules
+/node_modules
+
+#venv
+/backend/venv
+
+#Stream Test
+/tmp
+
+#api URLs
+urls.txt
+/src/config.js
+/dist/config.js
+
+#src files besides .ts
+src/*
+!src/*.ts
+

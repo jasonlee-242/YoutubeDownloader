@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@distube/ytdl-core": "^4.14.4"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.277",
+    "live-server": "^1.2.2",
+    "nodemon": "^3.1.7",
+    "typescript": "^5.6.3"
+  },
+  "scripts": {
+    "build": "tsc && cp src/*.html dist/ && cp src/*.css dist/",
+    "copy": "cp src/*.html dist/ && cp src/*.css dist/"
+  }
+}

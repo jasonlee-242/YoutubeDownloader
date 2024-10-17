@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist", // Output directory for transpiled JavaScript
+    "rootDir": "./src", // Input directory containing TypeScript
+    "target": "es6", // Target ECMAScript version
+    "module": "esnext", // Module system (ESM)
+    "types": ["chrome"], // Specify type package names to be included without being referenced in a source file.
+    "strict": true, // Strict type checking options
+    "esModuleInterop": true, // Ensures correct ES module interop
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true, // Ensure that casing is correct in imports.
+    "lib": ["es2015", "es2016", "dom", "es2018.promise"]
+    // "moduleResolution": "node"
+  },
+  "include": ["src/**/*"], // Include all files in the src directory
+  "exclude": ["node_modules", "./dist/**/*"]
+}

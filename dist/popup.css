@@ -1,0 +1,378 @@
+html,
+body {
+  width: 320px; /* Set an explicit width */
+  height: 500px; /* Set an explicit height */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(0deg, #283e51, #0a2342);
+  font-family: "Fjalla One", sans-serif;
+}
+
+.popup-container {
+  position: absolute;
+  width: 90%; /* Set to a percentage instead of a hardcoded pixel value */
+  max-width: 300px; /* Set a maximum width */  
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(42, 145, 219, 0.6);
+  padding: 20px 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align content inside the container to the center */
+}
+
+.logo img {
+  width: 80px; /* Adjust the size of the logo */
+  height: 80px;
+}
+
+.top-text {
+  color: rgb(222, 184, 184);
+  margin-bottom: 20px; /* Add spacing between title and input field */
+  margin-top: -10px;
+}
+
+.youtube-video-link,
+.video-name,
+.download-type {
+  width: 100%; /* Make these sections span the full width of the container */
+  text-align: center;
+  margin-bottom: 30px; /* Add spacing */
+  margin-top: -20px;
+}
+
+.desc-text {
+  color: rgb(218, 218, 218);
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+::placeholder {
+  text-align: center;
+  font-size: 15px;
+}
+
+input#videoname,
+input#videolink {
+  text-align: center; /* Centers the text inside the input */
+}
+
+.youtube-video-link input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+  font-size: 15px;
+}
+
+.video-name input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+  font-size: 15px;
+}
+
+.download-type {
+  margin-top: -5px;
+  display: flex;
+  justify-content: space-around; /* Ensure the MP3/MP4 buttons are spread evenly */
+  width: 100%;
+}
+
+.download-type-button {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  border: none;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: 0 0 0 2px #ffffff20;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.download-type-button span:last-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: rgb(131, 131, 193);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.download-type-button span:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.download-type-button:hover {
+  box-shadow: 0 0 0 5px #2195f360;
+}
+
+.download-type-button:active {
+  scale: 0.95;
+}
+
+.download-type-button.selected {
+  background-color: rgb(131, 131, 193);
+}
+
+.download-type-button:hover span:last-child {
+  width: 150px;
+  height: 150px;
+  opacity: 1;
+}
+
+.click-to-download {
+  width: 100%;
+}
+
+.download-button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #2e8aecd1;
+  color: white;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+  border-radius: 50px;
+  scale: 1.05;
+  transition: all 0.2s ease;
+}
+
+.download-button.hide{
+  background-color: transparent;
+}
+
+.download-errors {
+  border-color: red;
+  position: relative;
+  top: 270px;
+  margin: -20px;
+}
+
+.notification {
+  max-width: 280px;
+  background-color: #f44336;
+  color: white;
+  padding: 1px 15px;
+  border-radius: 10px;
+  text-align: center;
+  border-color: red;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; /* Prevents it from interfering with other elements */
+}
+
+/* .notification.hidden {
+  opacity: 0;
+} */
+
+.notification.show {
+  opacity: 1;
+}
+
+/* .base-download-text.hidden{
+  opacity: 0;
+} */
+
+.loader {
+  margin: 0 auto;
+  width: 60px;
+  height: 50px;
+  text-align: center;
+  font-size: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translateY(-50%) translateX(-50%);
+  
+  > div {
+    height: 100%;
+    width: 8px;
+    display: inline-block;
+    float: left;
+    margin-left: 2px;
+    -webkit-animation: delay 0.8s infinite ease-in-out;
+    animation: delay 0.8s infinite ease-in-out;
+  }
+  
+  .bar1{
+    background-color: #754fa0 ;
+  }
+  .bar2{
+    background-color: #09b7bf;
+    -webkit-animation-delay: -0.7s;
+    animation-delay: -0.7s;
+  }
+  .bar3{
+    background-color: #90d36b;
+    -webkit-animation-delay: -0.6s;
+    animation-delay: -0.6s;
+  }
+  .bar4{
+    background-color: #f2d40d;
+    -webkit-animation-delay: -0.5s;
+    animation-delay: -0.5s;
+  }
+  .bar5{
+    background-color: #fcb12b;
+    -webkit-animation-delay: -0.4s;
+    animation-delay: -0.4s;
+  }
+  .bar6{
+    background-color: #ed1b72;
+    -webkit-animation-delay: -0.3s;
+    animation-delay: -0.3s;
+  }
+}
+
+
+
+/* WebKit Keyframes for Safari/Chrome */
+@-webkit-keyframes delay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.05);
+  }
+  20% {
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
+/* Standard Keyframes for Firefox and others */
+@keyframes delay {
+  0%, 40%, 100% {
+    transform: scaleY(0.05);
+  }
+  20% {
+    transform: scaleY(1.0);
+  }
+}
+
+.hidden{
+  opacity: 0;
+}
+
+/* .loader {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  left: -32px;
+  border-radius: 50%;
+  color: #fff;
+  background: currentColor;
+  box-shadow: 32px 0 , -32px 0 ,  64px 0;
+}
+
+.loader.hidden {
+  opacity: 0;
+}
+
+.loader::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #f0f8ff;
+  animation: move 1s ease-in-out infinite;
+}
+
+@keyframes move {
+  0%, 20% {
+    left: 0;
+  }
+  30% {
+    left: 32px;
+  }
+  50%, 70% {
+    left: 32px;
+  }
+  80% {
+    left: 0;
+  }
+} */
+
+/* .loader::after {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  background:#8322b0;
+  animation: move 2.5s linear infinite alternate;
+} */
+/* @keyframes move {
+  0% , 5%{
+    left: -32px;
+    width: 16px;
+  }
+  15% , 20%{
+    left: -32px;
+    width: 48px;
+  }
+  30% , 35%{
+    left: 0px;
+    width: 16px;
+  }
+  45% , 50%{
+    left: 0px;
+    width: 48px;
+  }
+  60% , 65%{
+    left: 32px;
+    width: 16px;
+  }
+
+  75% , 80% {
+    left: 32px;
+    width: 48px;
+  }
+  95%, 100% {
+    left: 64px;
+    width: 16px;
+  }
+} */
+
+
+/* Container for the download button and loader
+.click-to-download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.base-download-text {
+  transition: opacity 0.4s ease-in-out;
+}

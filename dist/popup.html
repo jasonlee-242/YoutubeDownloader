@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="popup.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="popup.js"></script>
+    <style>
+      body {
+        font-family: "Fjalla One", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="popup-container">
+      <div class="logo">
+        <img src="./assets/logo.png" alt="YoutubeDownloader Logo" />
+      </div>
+      <h1 class="top-text"><b>YoutubeDownloader</b></h1>
+      <div class="youtube-video-link">
+        <p class="desc-text">Source Link</p>
+        <label for="link"></label>
+        <input
+          id="videolink"
+          type="text"
+          name="link"
+          placeholder="Enter a Youtube Link"
+        />
+      </div>
+      <div class="video-name">
+        <p class="desc-text">File Name</p>
+        <label for="name"></label>
+        <input
+          id="videoname"
+          type="text"
+          name="name"
+          maxlength="32"
+          placeholder="myfile"
+        />
+      </div>
+      <div class="download-type">
+        <p class="desc-text">Select File Type</p>
+        <button id="mp3Button" class="download-type-button">
+          <span><b>MP3</b></span>
+          <span></span>
+        </button>
+        <button id="mp4Button" class="download-type-button">
+          <span><b>MP4</b></span>
+          <span></span>
+        </button>
+      </div>
+      <div id='vid-download-container' class="click-to-download">
+        <button id="vid-download-button" class="download-button">
+          <b class="base-download-text" id="download-base-text">DOWNLOAD</b>
+          <div id="download-animation" class="loader hidden">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+            <div class="bar4"></div>
+            <div class="bar5"></div>
+            <div class="bar6"></div>
+        </div>
+        </button>
+      </div>
+    </div>
+    <div class="download-errors">
+      <div id="error-notification" class="notification hidden"></div>
+    </div>
+  </body>
+</html>
