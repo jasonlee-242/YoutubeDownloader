@@ -4,9 +4,6 @@
   "description": "Conveniently download Youtube videos into a variety of formats.",
   "permissions": ["tabs"],
   "host_permissions": ["https://*.youtube.com/*"],
-  "background": {
-    "service_worker": "background.js"
-  },
   "action": {
     "default_icon": {
       "16": "assets/16.png",
