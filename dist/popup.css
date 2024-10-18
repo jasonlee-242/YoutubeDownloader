@@ -1,7 +1,7 @@
 html,
 body {
-  width: 320px; /* Set an explicit width */
-  height: 500px; /* Set an explicit height */
+  width: 400px; /* Set an explicit width */
+  height: 570px; /* Set an explicit height */
   margin: 0;
   padding: 0;
   overflow: hidden; /* Prevent scrolling */
@@ -16,7 +16,8 @@ body {
 .popup-container {
   position: absolute;
   width: 90%; /* Set to a percentage instead of a hardcoded pixel value */
-  max-width: 300px; /* Set a maximum width */  
+  max-width: 300px; 
+  max-height: 80%;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   border: 2px solid rgba(255, 255, 255, 0.1);
@@ -25,6 +26,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* Align content inside the container to the center */
+  margin-bottom: 50px;
+  margin-top: 10px;
+}
+
+.popup-container:focus { 
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
 }
 
 .logo img {
@@ -143,6 +152,7 @@ input#videolink {
 
 .click-to-download {
   width: 100%;
+  position: relative;
 }
 
 .download-button {
@@ -172,21 +182,34 @@ input#videolink {
 .download-errors {
   border-color: red;
   position: relative;
-  top: 270px;
-  margin: -20px;
+  top: 240px;
+  margin: -10px;
 }
 
 .notification {
   max-width: 280px;
-  background-color: #f44336;
+  /* background-color: #f44336; */
   color: white;
   padding: 1px 15px;
   border-radius: 10px;
   text-align: center;
-  border-color: red;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  /* border-color: red; */
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); */
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none; /* Prevents it from interfering with other elements */
+  font-size: larger;
+}
+
+.notification.downloading{
+  background-color: #4045e4;
+  border-color: #262df8;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.notification.error{
+  background-color: #f44336;
+  border-color: red;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* .notification.hidden {
