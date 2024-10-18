@@ -63,6 +63,7 @@ function downloadVideo() {
   downloadButton.classList.add('hide');
   downloadButtonText.classList.add('hidden');
   downloadAnimation?.classList.remove('hidden');
+  throwNotice("Downloading!", true);
 
   // Hidden URL
   fetch('127.0.0.1', {
@@ -130,11 +131,17 @@ function updateYouTubeUrlInput(event: Event) {
 }
 
 // // Popup Alerts for Encountered Issues
-function throwNotice(message: string) {
+function throwNotice(message: string, isDownloading: boolean = false) {
   notification.textContent = message;
 
+  if (!isDownloading){
+    notification.classList.add('error');
+  }else{
+    notification.classList.add('downloading');
+  }
   notification.classList.remove("hidden");
   notification.classList.add("show");
+
 
   // Automatically hide the notification after 3 seconds
   setTimeout(() => {
@@ -143,6 +150,7 @@ function throwNotice(message: string) {
     // Optionally add hidden class after fading out
     setTimeout(() => {
       notification.classList.add("hidden");
+      notification.classList.remove("downloading", "error");
     }, 500); // Wait for the transition to finish before adding hidden
   }, 3000); // Adjust the time (3000 ms = 3 seconds)
 }

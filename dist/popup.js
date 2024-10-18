@@ -1,3 +1,4 @@
+"use strict";
 // import config from './config';
 // const apiUrl = config.apiUrlProd;
 let youtubeLink = "";
@@ -28,15 +29,14 @@ document.addEventListener("DOMContentLoaded", function () {
 // ---------FUNCTIONS----------
 // On a YT video -> Update the YT Link Input automatically to url
 // of the page. Listens to background.js for tab changes/reloads
-// -----IN DEVELOPMENT-----
-// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-//     if (request.type === "YT_TAB") {
-//         linkInput.value = youtubeLink = request.videoUrl; // Update the input field with the full YouTube URL
-//     }
-//     else if (request.type === "NO_YT_TAB") {
-//         linkInput.value = youtubeLink = "";
-//     }
-// });
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.type === "YT_TAB") {
+        linkInput.value = youtubeLink = request.videoUrl; // Update the input field with the full YouTube URL
+    }
+    else if (request.type === "NO_YT_TAB") {
+        linkInput.value = youtubeLink = "";
+    }
+});
 function downloadVideo() {
     //add check for valid link in case they enter -> directly click download button
     if (youtubeLink === "") {
@@ -54,7 +54,9 @@ function downloadVideo() {
     downloadButton.classList.add('hide');
     downloadButtonText.classList.add('hidden');
     downloadAnimation === null || downloadAnimation === void 0 ? void 0 : downloadAnimation.classList.remove('hidden');
-    fetch('https://youtubedownloader-27581260114.us-west1.run.app/download-video', {
+    throwNotice("Downloading!", true);
+    // Hidden URL
+    fetch('127.0.0.1', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -117,8 +119,14 @@ function updateYouTubeUrlInput(event) {
     }
 }
 // // Popup Alerts for Encountered Issues
-function throwNotice(message) {
+function throwNotice(message, isDownloading = false) {
     notification.textContent = message;
+    if (!isDownloading) {
+        notification.classList.add('error');
+    }
+    else {
+        notification.classList.add('downloading');
+    }
     notification.classList.remove("hidden");
     notification.classList.add("show");
     // Automatically hide the notification after 3 seconds
@@ -127,6 +135,7 @@ function throwNotice(message) {
         // Optionally add hidden class after fading out
         setTimeout(() => {
             notification.classList.add("hidden");
+            notification.classList.remove("downloading", "error");
         }, 500); // Wait for the transition to finish before adding hidden
     }, 3000); // Adjust the time (3000 ms = 3 seconds)
 }
