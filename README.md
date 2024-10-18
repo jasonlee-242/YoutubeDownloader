@@ -1,7 +1,7 @@
 # Youtube Downloader
 
 ### Languages: HTML / CSS / Javascript / Typescript / Python
-### Technologies: Git / Flask / Google Cloud Run / Live Server
+### Technologies: Git / Flask / Docker / Google Cloud Run / Live Server
 
 A simple app for downloading Youtube Videos in MP3 and MP4 formats using the yt-dlp library (https://github.com/yt-dlp/yt-dlp). Designed with the intent to be a chrome extension. 
 
